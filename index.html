@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>年度影片方案簡報</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        /* 標題區 */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: #4b5563;
+        }
+        
+        /* 表格區 */
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #e5e7eb;
+        }
+        
+        th {
+            background: #f3f4f6;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+            text-align: left;
+        }
+        
+        td {
+            padding: 1rem 0.75rem;
+            border: 1px solid #d1d5db;
+            text-align: center;
+        }
+        
+        .big-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+        
+        .purple-text {
+            color: #7c3aed;
+        }
+        
+        .red-text {
+            color: #dc2626;
+        }
+        
+        .strikethrough {
+            text-decoration: line-through;
+        }
+        
+        .highlight-row {
+            background: #fafafa;
+        }
+        
+        /* 問題與方案區 */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .comparison-box {
+            background: white;
+            border-radius: 15px;
+            padding: 1.25rem;
+            border: 2px solid;
+        }
+        
+        .problem-box {
+            border-color: #fca5a5;
+            background: rgba(254, 226, 226, 0.3);
+        }
+        
+        .solution-box {
+            border-color: #86efac;
+            background: rgba(220, 252, 231, 0.3);
+        }
+        
+        .box-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #111827;
+        }
+        
+        .box-list {
+            list-style: none;
+            font-size: 0.875rem;
+            color: #4b5563;
+            line-height: 1.8;
+        }
+        
+        .box-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 加值服務區 */
+        .value-add {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .value-title {
+            text-align: center;
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+        }
+        
+        .value-subtitle {
+            text-align: center;
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gift-box {
+            background: linear-gradient(to right, #3b82f6, #ec4899);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .gift-main {
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 0.5rem 0;
+        }
+        
+        .gift-detail {
+            font-size: 0.875rem;
+            opacity: 0.95;
+            margin-top: 0.5rem;
+        }
+        
+        .gift-highlight {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #fef08a;
+            margin-top: 0.75rem;
+        }
+        
+        /* 重點說明卡片 */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .info-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-title {
+            font-weight: 700;
+            color: #111827;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .info-text {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        
+        /* CTA區 */
+        .cta-box {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .cta-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.75rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #7c3aed, #dc2626);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+            transition: transform 0.3s ease;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+        
+        /* 手機版優化 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 0.75rem;
+            }
+            
+            .main-title {
+                font-size: 1.875rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .table-container {
+                padding: 1rem;
+            }
+            
+            th {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.75rem;
+            }
+            
+            td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.875rem;
+            }
+            
+            .big-number {
+                font-size: 1.75rem;
+            }
+            
+            .comparison {
+                gap: 0.75rem;
+            }
+            
+            .comparison-box {
+                padding: 1rem;
+            }
+            
+            .box-title {
+                font-size: 1rem;
+            }
+            
+            .box-list {
+                font-size: 0.8rem;
+            }
+            
+            .value-add {
+                padding: 1.25rem;
+            }
+            
+            .value-title {
+                font-size: 1.5rem;
+            }
+            
+            .gift-box {
+                padding: 1.25rem;
+            }
+            
+            .gift-main {
+                font-size: 1.5rem;
+            }
+            
+            .info-cards {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .info-card {
+                padding: 0.75rem 0.5rem;
+            }
+            
+            .info-icon {
+                font-size: 1.5rem;
+            }
+            
+            .info-title {
+                font-size: 0.75rem;
+            }
+            
+            .info-text {
+                font-size: 0.7rem;
+            }
+            
+            .cta-box {
+                padding: 1.5rem 1rem;
+            }
+            
+            .cta-title {
+                font-size: 1.25rem;
+            }
+            
+            .cta-subtitle {
+                font-size: 0.875rem;
+            }
+            
+            .cta-button {
+                padding: 0.875rem 2rem;
+                font-size: 1.125rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5rem;
+            }
+            
+            .big-number {
+                font-size: 1.5rem;
+            }
+            
+            th, td {
+                font-size: 0.7rem;
+                padding: 0.5rem 0.25rem;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-cards {
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 標題區 -->
+        <div class="header">
+            <div class="badge">🎉 年底限定優惠</div>
+            <h1 class="main-title">年度影片方案</h1>
+            <p class="subtitle">持續產出，演算法不停滯</p>
+        </div>
+        
+        <!-- 表格區 -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">影片數量</th>
+                        <th style="width: 50%;"><span class="strikethrough">原價 30,000元</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><div class="big-number purple-text">120支</div></td>
+                        <td><div class="big-number red-text">14,000元</div></td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>12個月(1年)</td>
+                        <td>每月價格</td>
+                    </tr>
+                    <tr>
+                        <td>每月10支</td>
+                        <td style="color: #dc2626; font-weight: 700;">限時優惠價</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 問題與方案 -->
+        <div class="comparison">
+            <div class="comparison-box problem-box">
+                <div class="box-title">→ 你可能遇到...</div>
+                <ul class="box-list">
+                    <li>◎ 體驗後想繼續拍攝但要等2-3個月</li>
+                    <li>◎ 不想社群內容出現停滯期</li>
+                    <li>◎ 不想演算法推薦受影響</li>
+                </ul>
+            </div>
+            <div class="comparison-box solution-box">
+                <div class="box-title">✓ 現在你可以...</div>
+                <ul class="box-list">
+                    <li>◎ 預先安排全年拍攝行程</li>
+                    <li>◎ 每月穩定10支影片產出</li>
+                    <li>◎ 維持社群活躍度</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 加值服務 -->
+        <div class="value-add">
+            <h2 class="value-title">🎁 獨家加值</h2>
+            <p class="value-subtitle">加碼贈送，助您獲取更多關注者</p>
+            
+            <div class="gift-box">
+                <div style="font-size: 1.125rem; font-weight: 600;">每月贈送</div>
+                <div class="gift-main">1支廣告投遞</div>
+                <div class="gift-detail">連續5天曝光 📈 提升曝光率</div>
+                <div class="gift-highlight">⭐ 連帶影響前後影片或貼文</div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1rem; padding: 0.75rem; background: #fff3cd; border-radius: 10px; border: 1px solid #ffc107;">
+                <div style="color: #856404; font-size: 0.875rem; font-weight: 600;">
+                    ※ 限蕾娜塔產品置入之影片
+                </div>
+            </div>
+        </div>
+        
+        <!-- 重點說明 -->
+        <div class="info-cards">
+            <div class="info-card">
+                <div class="info-icon">📅</div>
+                <div class="info-title">開始時間</div>
+                <div class="info-text">2026年<br>(春節假期後開始安排)</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">⏰</div>
+                <div class="info-title">優惠截止</div>
+                <div class="info-text">2025/12/31前</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">💰</div>
+                <div class="info-title">限時價格</div>
+                <div class="info-text">僅此一次</div>
+            </div>
+        </div>
+        
+        <!-- CTA -->
+        <div class="cta-box">
+            <div class="cta-title">⚡ 市場變動快速，優惠不等人</div>
+            <div class="cta-subtitle">回饋支持客戶的特別計畫，錯過不再有</div>
+            <a href="https://reprojectbt-web.github.io/renata-pricing/" target="_blank" class="cta-button">
+                立即預訂，鎖定優惠價格
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // 優化觸控滾動體驗
+        document.body.style.webkitOverflowScrolling = 'touch';
+        
+        // 防止雙擊縮放
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
